@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculadora de Vectores</title>
+ <script src="https://cdn.tailwindcss.com"></script>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white p-8">
+  <main>
+    <h1 class="text-3xl font-bold mb-4">Calculadora de Vectores</h1>
+
+
+    <fieldset class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <legend class="text-xl">Vector 1</legend>
+      <div>
+        <label for="vector1x" class="block font-semibold">X:</label>
+        <input placeholder="Ingrese un valor" type="number" id="vector1x" class="w-full bg-blue-800 border border-blue-700 rounded px-3 py-2">
+      </div>
+      <div>
+        <label for="vector1y" class="block font-semibold">Y:</label>
+        <input placeholder="Ingrese un valor" type="number" id="vector1y" class="w-full bg-blue-800 border border-blue-700 rounded px-3 py-2">
+      </div>
+      <div>
+        <label for="vector1z" class="block font-semibold">Z:</label>
+        <input placeholder="Ingrese un valor" type="number" id="vector1z" class="w-full bg-blue-800 border border-blue-700 rounded px-3 py-2">
+      </div>
+    </fieldset>
+
+    <fieldset class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <legend class="text-xl">Vector 2</legend>
+      <div class="col-span-1">
+        <label for="vector2x" class="block font-semibold">X:</label>
+        <input placeholder="Ingrese un valor" type="number" id="vector2x" class="block w-full bg-blue-800 border border-blue-700 rounded px-3 py-2">
+      </div>
+      <div class="col-span-1">
+        <label for="vector2y" class="block font-semibold">Y:</label>
+        <input placeholder="Ingrese un valor" type="number" id="vector2y" class="block w-full bg-blue-800 border border-blue-700 rounded px-3 py-2">
+      </div>
+      <div class="col-span-1">
+        <label for="vector2z" class="block font-semibold">Z:</label>
+        <input placeholder="Ingrese un valor" type="number" id="vector2z" class="block w-full bg-blue-800 border border-blue-700 rounded px-3 py-2">
+      </div>
+    </fieldset>
+
+<div class="flex flex-wrap gap-2">
+  <button onclick="calcularModulo()" class="bg-gray-700 hover:bg-blue-600 focus:bg-blue-600 text-white px-4 py-2 rounded-lg">Módulo de Vector</button>
+  <button onclick="calcularSuma()" class="bg-gray-700 hover:bg-blue-600 focus:bg-blue-600 text-white px-4 py-2 rounded-lg">Suma de Vectores</button>
+  <button onclick="calcularResta()" class="bg-gray-700 hover:bg-blue-600 focus:bg-blue-600 text-white px-4 py-2 rounded-lg">Resta de Vectores</button>
+  <button onclick="calcularProductoEscalar()" class="bg-gray-700 hover:bg-blue-600 focus:bg-blue-600 text-white px-4 py-2 rounded-lg">Producto por un Escalar</button>
+  <button onclick="calcularEscalar2Vectores()" class="bg-gray-700 hover:bg-blue-600 focus:bg-blue-600 text-white px-4 py-2 rounded-lg">Producto Escalar entre 2 Vectores</button>
+  <button onclick="calcularProductoVectorial()" class="bg-gray-700 hover:bg-blue-600 focus:bg-blue-600 text-white px-4 py-2 rounded-lg">Producto Vectorial</button>
+ <button onclick="borrar()" type="button" class="bg-red-800 hover:bg-red-600 focus:bg-red-700 text-white hover:text-goldenrod focus:text-goldenrod px-4 py-2 rounded-lg">C</button>
+
+</div>
+
+
+
+
+
+    <p id="resultado" class="text-gray-300 font-semibold mt-4"></p>
+    </main>
+
+    <br>
+
+    <p id="resultado" class="text-gray-700 font-semibold mt-4"></p>
+
+  <script>
+      function verificarCampos1() {
+      const vector1x = document.getElementById("vector1x").value;
+      const vector1y = document.getElementById("vector1y").value;
+      const vector1z = document.getElementById("vector1z").value;
+
+      if (vector1x === "" || vector1y === "" || vector1z === "") {
+        alert("Por favor, verifique los campos del vector 1 antes de continuar.");
+        return false;
+      }
+      return true;
+    }
+  
+  
+        function verificarCampos2() {
+      const vector2x = document.getElementById("vector2x").value;
+      const vector2y = document.getElementById("vector2y").value;
+      const vector2z = document.getElementById("vector2z").value;
+
+      if (vector2x === "" || vector2y === "" || vector2z === "") {
+        alert("Por favor, verifique los campos del vector 2 antes de continuar.");
+        return false;
+      }
+      return true;
+    }
+  
+
+      
+      
+      
+    function calcularModulo() {
+    if (!verificarCampos1()) return;
+    
+      const x = parseFloat(document.getElementById("vector1x").value);
+      const y = parseFloat(document.getElementById("vector1y").value);
+      const z = parseFloat(document.getElementById("vector1z").value);
+      const modulo = Math.sqrt(x * x + y * y + z * z);
+      document.getElementById("resultado").innerText = `El módulo del Vector 1 es: ${modulo}`;
+    }
+
+    function calcularSuma() {
+    if (!verificarCampos1()||!verificarCampos2()) return;
+    
+      const x1 = parseFloat(document.getElementById("vector1x").value);
+      const y1 = parseFloat(document.getElementById("vector1y").value);
+      const z1 = parseFloat(document.getElementById("vector1z").value);
+      const x2 = parseFloat(document.getElementById("vector2x").value);
+      const y2 = parseFloat(document.getElementById("vector2y").value);
+      const z2 = parseFloat(document.getElementById("vector2z").value);
+      const sumaX = x1 + x2;
+      const sumaY = y1 + y2;
+      const sumaZ = z1 + z2;
+      document.getElementById("resultado").innerText = `La suma de los Vectores es: (${sumaX}, ${sumaY}, ${sumaZ})`;
+    }
+
+    function calcularResta() {
+     if (!verificarCampos1()||!verificarCampos2()) return;
+      const x1 = parseFloat(document.getElementById("vector1x").value);
+      const y1 = parseFloat(document.getElementById("vector1y").value);
+      const z1 = parseFloat(document.getElementById("vector1z").value);
+      const x2 = parseFloat(document.getElementById("vector2x").value);
+      const y2 = parseFloat(document.getElementById("vector2y").value);
+      const z2 = parseFloat(document.getElementById("vector2z").value);
+      const restaX = x1 - x2;
+      const restaY = y1 - y2;
+      const restaZ = z1 - z2;
+      document.getElementById("resultado").innerText = `La resta de los Vectores es: (${restaX}, ${restaY}, ${restaZ})`;
+    }
+
+    function calcularProductoEscalar() {
+     if (!verificarCampos1()) return;
+      const x1 = parseFloat(document.getElementById("vector1x").value);
+      const y1 = parseFloat(document.getElementById("vector1y").value);
+      const z1 = parseFloat(document.getElementById("vector1z").value);
+      const escalar = parseFloat(prompt("Ingrese el escalar:"));
+      const productoX = x1 * escalar;
+      const productoY = y1 * escalar;
+      const productoZ = z1 * escalar;
+      document.getElementById("resultado").innerText = `El producto escalar del Vector 1 por el escalar ${escalar} es: (${productoX}, ${productoY}, ${productoZ})`;
+    }
+
+    function calcularEscalar2Vectores() {
+     if (!verificarCampos1()||!verificarCampos2()) return;
+      const x1 = parseFloat(document.getElementById("vector1x").value);
+      const y1 = parseFloat(document.getElementById("vector1y").value);
+      const z1 = parseFloat(document.getElementById("vector1z").value);
+      const x2 = parseFloat(document.getElementById("vector2x").value);
+      const y2 = parseFloat(document.getElementById("vector2y").value);
+      const z2 = parseFloat(document.getElementById("vector2z").value);
+      const productoX = x1 * x2;
+      const productoY = y1 * y2;
+      const productoZ = z1 * z2;
+      document.getElementById("resultado").innerText = `El producto escalar del Vector 1 por el Vector 2 es: (${productoX}, ${productoY}, ${productoZ})`;
+    }
+
+    function calcularProductoVectorial() {
+     if (!verificarCampos1()||!verificarCampos2()) return;
+      const x1 = parseFloat(document.getElementById("vector1x").value);
+      const y1 = parseFloat(document.getElementById("vector1y").value);
+      const z1 = parseFloat(document.getElementById("vector1z").value);
+      const x2 = parseFloat(document.getElementById("vector2x").value);
+      const y2 = parseFloat(document.getElementById("vector2y").value);
+      const z2 = parseFloat(document.getElementById("vector2z").value);
+      const productoX = y1 * z2 - z1 * y2;
+      const productoY = z1 * x2 - x1 * z2;
+      const productoZ = x1 * y2 - y1 * x2;
+      document.getElementById("resultado").innerText = `El producto vectorial de los Vectores es: (${productoX}, ${productoY}, ${productoZ})`;
+    }
+
+
+function borrar(){
+    const inputs = document.querySelectorAll("fieldset input");
+  inputs.forEach(input => {
+      input.value = "";
+    });
+}
+  </script>
+</body>
+</html>
+
